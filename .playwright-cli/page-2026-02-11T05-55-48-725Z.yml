@@ -1,0 +1,11 @@
+- generic [ref=e4]:
+  - heading "Counter App" [level=1] [ref=e5]
+  - paragraph [ref=e7]: "1"
+  - generic [ref=e8]:
+    - button [active] [ref=e9] [cursor=pointer]:
+      - img [ref=e10]
+    - button [ref=e11] [cursor=pointer]:
+      - img [ref=e12]
+    - button [ref=e15] [cursor=pointer]:
+      - img [ref=e16]
+  - paragraph [ref=e18]: Click the buttons to change the counter
