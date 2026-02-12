@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Plus, Minus, RotateCcw, ListTodo, Hash } from 'lucide-react';
+import { Plus, Minus, RotateCcw, ListTodo, Hash, Zap } from 'lucide-react';
 import TodoList from './TodoList';
+import HeavyComputation from './HeavyComputation';
 
 function Counter() {
   const [count, setCount] = useState(0);
@@ -60,14 +61,16 @@ function Counter() {
 }
 
 function App() {
-  const [page, setPage] = useState<'counter' | 'todo'>('counter');
+  const [page, setPage] = useState<'counter' | 'todo' | 'heavy'>('counter');
+
+  const bgColor = {
+    counter: 'bg-gradient-to-br from-blue-50 to-blue-100',
+    todo: 'bg-gradient-to-br from-purple-50 to-purple-100',
+    heavy: 'bg-gradient-to-br from-orange-50 to-orange-100',
+  }[page];
 
   return (
-    <div className={`min-h-screen flex flex-col items-center justify-center p-4 ${
-      page === 'counter'
-        ? 'bg-gradient-to-br from-blue-50 to-blue-100'
-        : 'bg-gradient-to-br from-purple-50 to-purple-100'
-    }`}>
+    <div className={`min-h-screen flex flex-col items-center justify-center p-4 ${bgColor}`}>
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 bg-white rounded-full shadow-lg p-2 flex gap-2">
         <button
           onClick={() => setPage('counter')}
@@ -89,11 +92,24 @@ function App() {
           }`}
         >
           <ListTodo size={18} />
-          Todo List
+          Todo
+        </button>
+        <button
+          onClick={() => setPage('heavy')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+            page === 'heavy'
+              ? 'bg-orange-500 text-white'
+              : 'text-gray-600 hover:bg-gray-100'
+          }`}
+        >
+          <Zap size={18} />
+          Heavy Calc
         </button>
       </nav>
 
-      {page === 'counter' ? <Counter /> : <TodoList />}
+      {page === 'counter' && <Counter />}
+      {page === 'todo' && <TodoList />}
+      {page === 'heavy' && <HeavyComputation />}
     </div>
   );
 }
